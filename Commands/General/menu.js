@@ -2,18 +2,18 @@ const { DateTime } = require('luxon');
 const fs = require('fs');
 
 module.exports = async (context) => {
-    const { client, m, totalCommands, mode, botname, prefix } = context;
+    const { client, m, totalCommands, mode, botname, prefix, pict } = context;
 
     try {
         const categories = [
-            
+
             { name: 'General', emoji: '✍️' },
             { name: 'Settings', emoji: '⚙️' },
 { name: 'Owner', emoji: '👑' },
 { name: 'Wa-Privacy', emoji: '🪀' },
 { name: 'Groups', emoji: '👥' },
 { name: 'AI', emoji: '🤖' },
-            
+
             { name: 'Media', emoji: '🎥' },
             { name: 'Editting', emoji: '✂️' },
             { name: 'Groups', emoji: '👥' },
@@ -83,13 +83,24 @@ module.exports = async (context) => {
             menuText += '\n';
         }
 
-        await client.sendMessage(m.chat, {
-            video: { url: "https://telegra.ph/file/db49f1db0ec49d2ed289f.mp4" },
-            caption: menuText,
-            gifPlayback: true
-        }, {
-            quoted: m
-        });
+
+
+await client.sendMessage(m.chat, {
+                        text: menuText,
+                        contextInfo: {
+                            externalAdReply: {
+                                showAdAttribution: false,
+                                title: `DREADED V3`,
+                                body: `Hi ${m.pushName}`,
+                                thumbnail: pict,
+                                sourceUrl: `https://github.com/Fortunatusmokaya/dreaded-v3`,
+                                mediaType: 1,
+                                renderLargerThumbnail: true
+                            }
+                        }
+                    }, {
+                        quoted: m
+                    })
 
     } catch (error) {
         console.error(error);
